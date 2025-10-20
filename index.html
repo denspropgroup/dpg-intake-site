@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Denali's Property Group — We Buy Houses & Land</title>
+  <meta name="description" content="We buy houses & land in North Carolina and beyond. Fast, fair, and flexible. Submit your property or share your buy box." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23f97316'/%3E%3C/svg%3E">
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass { backdrop-filter: blur(6px); background: rgba(255,255,255,0.05); }
+    .grad-o-p { background-image: linear-gradient(90deg, #f97316, #a855f7); }
+    .tab-active { background-image: linear-gradient(90deg,#f97316,#a855f7); color: white; }
+    .card { border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; background: rgba(24,24,27,0.6); }
+    .input { width: 100%; border: 1px solid rgba(255,255,255,0.12); background: rgba(39,39,42,0.6); color: white; padding: .6rem .75rem; border-radius: .75rem; }
+    .label { color: #e5e7eb; font-size: .9rem; }
+    .hidden-hp { position:absolute !important; left:-5000px !important; top:auto !important; height:1px !important; width:1px !important; overflow:hidden !important; }
+  </style>
+</head>
+<body class="min-h-screen text-white bg-gradient-to-b from-purple-900 via-zinc-900 to-zinc-950">
+  <nav class="sticky top-0 z-30 glass border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="h-6 w-6 rounded-full bg-orange-400"></div>
+        <span class="font-bold tracking-wide">Denali's Property Group</span>
+      </div>
+      <a href="#forms" class="text-sm underline">Start</a>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden">
+    <div class="absolute inset-0" style="background: radial-gradient(circle at 30% 10%, rgba(249,115,22,.25), transparent 50%), radial-gradient(circle at 80% 30%, rgba(168,85,247,.25), transparent 50%);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24">
+      <h1 class="text-5xl font-black leading-tight">
+        We buy houses &amp; land in <span class="bg-clip-text text-transparent grad-o-p">North Carolina</span> &amp; beyond.
+      </h1>
+      <p class="mt-5 text-lg text-zinc-200">
+        Fast, fair, and flexible. We buy properties in any condition — probate, code violations, preforeclosure, or if you’re just looking to sell.
+        Buyers can share their buy box for perfect-fit deals.
+      </p>
+      <div class="mt-8 flex gap-3">
+        <a href="#forms" class="px-5 py-3 grad-o-p rounded-2xl font-semibold shadow-lg">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="forms" class="max-w-6xl mx-auto px-4 pb-20">
+    <!-- Tabs -->
+    <div class="grid grid-cols-2 w-full glass border border-white/10 rounded-xl mt-8 overflow-hidden">
+      <button id="tab-seller" class="px-4 py-2 text-sm" onclick="setTab('seller')">Sell a Property</button>
+      <button id="tab-buyer" class="px-4 py-2 text-sm" onclick="setTab('buyer')">Buyer Buy Box</button>
+    </div>
+
+    <!-- SELLER CARD -->
+    <div id="panel-seller" class="mt-6 card">
+      <div class="p-6 border-b border-white/10"><h3 class="text-xl font-semibold">Tell us about your property</h3></div>
+      <div class="p-6">
+        <form id="form-seller" onsubmit="return handleSubmit(event,'seller')" class="space-y-10">
+          <input type="text" name="website" class="hidden-hp" autocomplete="off" tabindex="-1" aria-hidden="true" />
+          <div class="space-y-4">
+            <div><div class="text-lg font-semibold text-zinc-100">Contact</div></div>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div><label class="label">Full Name <span class="text-rose-400">*</span></label><input required name="name" placeholder="Jane Seller" class="input"></div>
+              <div><label class="label">Phone <span class="text-rose-400">*</span></label><input required name="phone" placeholder="(555) 555-5555" class="input"></div>
+              <div><label class="label">Email</label><input type="email" name="email" placeholder="you@example.com" class="input"></div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div><div class="text-lg font-semibold text-zinc-100">Property</div><p class="text-sm text-zinc-300 mt-1">We buy in North Carolina and nationwide.</p></div>
+            <div class="grid md:grid-cols-4 gap-4">
+              <div><label class="label">Street Address <span class="text-rose-400">*</span></label><input required name="address" placeholder="123 Main St" class="input"></div>
+              <div><label class="label">City <span class="text-rose-400">*</span></label><input required name="city" placeholder="Greensboro" class="input"></div>
+              <div><label class="label">State <span class="text-rose-400">*</span></label><input required name="state" value="NC" class="input"></div>
+              <div><label class="label">ZIP <span class="text-rose-400">*</span></label><input required name="zip" placeholder="27401" class="input"></div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-4">
+              <div><label class="label">Property Type</label>
+                <select name="ptype" class="input">
+                  <option value="">Select type</option>
+                  <option value="sfr">Single Family</option>
+                  <option value="condo">Condo/Townhome</option>
+                  <option value="multi">Multi-Family</option>
+                  <option value="land">Land / Lot</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div><label class="label">Beds</label><input name="beds" type="number" min="0" placeholder="3" class="input"></div>
+              <div><label class="label">Baths</label><input name="baths" type="number" min="0" step="0.5" placeholder="2" class="input"></div>
+              <div><label class="label">Sq Ft</label><input name="sqft" type="number" min="0" placeholder="1400" class="input"></div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-4">
+              <div><label class="label">Lot Size (acres)</label><input name="lot" type="number" step="0.01" placeholder="0.20" class="input"></div>
+              <div><label class="label">Occupancy</label>
+                <select name="occupancy" class="input">
+                  <option value="">Select</option>
+                  <option value="vacant">Vacant</option>
+                  <option value="owner">Owner-Occupied</option>
+                  <option value="tenant">Tenant-Occupied</option>
+                </select>
+              </div>
+              <div><label class="label">Listed on MLS?</label>
+                <select name="listed" class="input">
+                  <option value="">Select</option>
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </div>
+              <div><label class="label">Asking Price ($)</label><input name="asking_price" type="number" min="0" placeholder="e.g., 180000" class="input"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div><label class="label">Condition / Notes</label>
+                <textarea name="condition" class="input" placeholder="Tell us about repairs, updates, or any issues (roof, HVAC, foundation, etc.)"></textarea>
+              </div>
+              <div class="grid gap-3">
+                <div class="label">Situation (check all that apply)</div>
+                <div class="grid sm:grid-cols-2 gap-3 text-sm text-zinc-200">
+                  <label class="inline-flex gap-2 items-center"><input type="checkbox" name="probate" /> Probate / Inheritance</label>
+                  <label class="inline-flex gap-2 items-center"><input type="checkbox" name="code" /> Code Violations</label>
+                  <label class="inline-flex gap-2 items-center"><input type="checkbox" name="prefore" /> Preforeclosure</label>
+                  <label class="inline-flex gap-2 items-center"><input type="checkbox" name="justsell" /> Just looking to sell</label>
+                </div>
+                <div><label class="label">Photos / Drive link</label><input name="photos" placeholder="https://drive.google.com/..." class="input"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div><div class="text-lg font-semibold text-zinc-100">Best time to contact</div></div>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div><label class="label">Preferred Contact Window</label>
+                <select name="contact_window" class="input">
+                  <option value="">Select</option>
+                  <option value="morning">Morning</option>
+                  <option value="afternoon">Afternoon</option>
+                  <option value="evening">Evening</option>
+                </select>
+              </div>
+              <div><label class="label">Urgency</label>
+                <select name="urgency" class="input">
+                  <option value="">Select</option>
+                  <option value="asap">ASAP</option>
+                  <option value="2-7">Within 2–7 days</option>
+                  <option value="flex">Flexible</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-4">
+            <p class="text-sm text-zinc-400">By submitting, you agree to be contacted by Denali's Property Group via phone, text, or email.</p>
+            <button class="grad-o-p hover:opacity-90 rounded-xl px-6 py-3 font-semibold">Get My Offer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- BUYER CARD -->
+    <div id="panel-buyer" class="mt-6 card hidden">
+      <div class="p-6 border-b border-white/10"><h3 class="text-xl font-semibold">Share your buy box</h3></div>
+      <div class="p-6">
+        <form id="form-buyer" onsubmit="return handleSubmit(event,'buyer')" class="space-y-10">
+          <input type="text" name="website" class="hidden-hp" autocomplete="off" tabindex="-1" aria-hidden="true" />
+          <div class="space-y-4">
+            <div><div class="text-lg font-semibold text-zinc-100">Contact</div></div>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div><label class="label">Full Name <span class="text-rose-400">*</span></label><input required name="name" placeholder="John Buyer" class="input"></div>
+              <div><label class="label">Phone <span class="text-rose-400">*</span></label><input required name="phone" placeholder="(555) 555-5555" class="input"></div>
+              <div><label class="label">Email <span class="text-rose-400">*</span></label><input required type="email" name="email" placeholder="you@investors.com" class="input"></div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div><div class="text-lg font-semibold text-zinc-100">Markets &amp; Strategy</div><p class="text-sm text-zinc-300 mt-1">Primary focus in NC, open to other states.</p></div>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div><label class="label">Target States / Counties</label><input name="markets" placeholder="NC (Guilford, Forsyth), SC (Horry), VA (Richmond)" class="input"></div>
+              <div><label class="label">Asset Types</label><input name="asset_types" placeholder="SFR, Townhome, Condo, Duplex, Small Multi (2–20), Land" class="input"></div>
+              <div><label class="label">Strategy</label><input name="strategy" placeholder="Fix & Flip, BRRRR, Long-term Rental, Wholetail" class="input"></div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-4">
+              <div><label class="label">Min Beds</label><input name="min_beds" type="number" min="0" placeholder="2" class="input"></div>
+              <div><label class="label">Min Baths</label><input name="min_baths" type="number" min="0" step="0.5" placeholder="1" class="input"></div>
+              <div><label class="label">Year Built ≥</label><input name="year_min" type="number" placeholder="1950" class="input"></div>
+              <div><label class="label">Max Purchase ($)</label><input name="max_price" type="number" placeholder="350000" class="input"></div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-4">
+              <div><label class="label">Rehab Level</label>
+                <select name="rehab" class="input">
+                  <option value="">Select</option>
+                  <option value="light">Light</option>
+                  <option value="medium">Medium</option>
+                  <option value="heavy">Heavy / Full Gut</option>
+                </select>
+              </div>
+              <div><label class="label">Close Timeline</label>
+                <select name="timeline" class="input">
+                  <option value="">Select</option>
+                  <option value="7">7-10 days</option>
+                  <option value="14">14-21 days</option>
+                  <option value="30">30+ days</option>
+                </select>
+              </div>
+              <div><label class="label">Proof of Funds on File?</label>
+                <select name="pof" class="input">
+                  <option value="">Select</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div><label class="label">Deal Types</label><input name="deal_types" placeholder="Assignments, Double Close, Novations, Creative" class="input"></div>
+            </div>
+            <div class="grid gap-4">
+              <div><label class="label">Notes / Buy Box Nuance</label><textarea name="notes" class="input" placeholder="Tell us what makes a perfect deal for you. Include neighborhoods, school zones, HOAs you avoid, septic vs. sewer, etc."></textarea></div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3 text-sm text-zinc-300">
+              <input type="checkbox" id="newsletter" name="newsletter" class="h-4 w-4" />
+              <label for="newsletter">Send me off-market opportunities</label>
+            </div>
+            <button class="grad-o-p hover:opacity-90 rounded-xl px-6 py-3 font-semibold">Save My Buy Box</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="border-t border-white/10 bg-zinc-950/60">
+    <div class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 space-y-3">
+        <h3 class="text-2xl font-bold">Questions? Let's talk.</h3>
+        <p class="text-zinc-300">We keep it simple, private, and professional. Reach out and we'll move at your pace.</p>
+      </div>
+      <div class="grid gap-3">
+        <a class="flex items-center gap-2 text-zinc-200" href="tel:+13363109744"><span class="inline-block h-5 w-5 bg-orange-400 rounded"></span> (336) 310-9744</a>
+        <a class="flex items-center gap-2 text-zinc-200" href="mailto:denspropgroup@yahoo.com"><span class="inline-block h-5 w-5 bg-orange-400 rounded"></span> denspropgroup@yahoo.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-zinc-400 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <p>© {datetime.datetime.now().year} Denali's Property Group. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <span class="inline-flex items-center gap-1">North Carolina-based • Nationwide friendly</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxmX981g0pc7R9l3IQ-3KUpEWiXwxJ6BcsfPhRDvBFmRqz6WGQ9F_KCgl2FA6b_CoIC/exec";
+
+    function setTab(name) {
+      const sellerBtn = document.getElementById('tab-seller');
+      const buyerBtn = document.getElementById('tab-buyer');
+      const seller = document.getElementById('panel-seller');
+      const buyer = document.getElementById('panel-buyer');
+      if (name === 'seller') {
+        sellerBtn.classList.add('tab-active'); buyerBtn.classList.remove('tab-active');
+        seller.classList.remove('hidden'); buyer.classList.add('hidden');
+      } else {
+        buyerBtn.classList.add('tab-active'); sellerBtn.classList.remove('tab-active');
+        buyer.classList.remove('hidden'); seller.classList.add('hidden');
+      }
+    }
+    setTab('seller');
+
+    async function handleSubmit(ev, type) {
+      ev.preventDefault();
+      const form = ev.target;
+      const data = Object.fromEntries(new FormData(form).entries());
+      if (data.website) return false;
+      data.formType = type;
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        alert((type === 'buyer' ? 'Buyer' : 'Seller') + ' info received! We\'ll reach out soon.');
+        form.reset();
+      } catch (e) {
+        console.error(e);
+        alert('We could not send your info. Please email us at denspropgroup@yahoo.com.');
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
