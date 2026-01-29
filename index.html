@@ -243,7 +243,7 @@
 
   <footer class="border-t border-white/10">
     <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-zinc-400 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <p>© {datetime.datetime.now().year} Denali's Property Group. All rights reserved.</p>
+    <p>© <span id="year"></span> Denali's Property Group. All rights reserved.</p>
       <div class="flex items-center gap-4">
         <span class="inline-flex items-center gap-1">North Carolina-based • Nationwide friendly</span>
       </div>
@@ -290,8 +290,7 @@
       return false;
     }
   </script>
-  <script>
   document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+</script>  
 </body>
 </html>
