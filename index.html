@@ -18,6 +18,7 @@
     .hidden-hp { position:absolute !important; left:-5000px !important; top:auto !important; height:1px !important; width:1px !important; overflow:hidden !important; }
   </style>
 </head>
+
 <body class="min-h-screen text-white bg-gradient-to-b from-purple-900 via-zinc-900 to-zinc-950">
   <nav class="sticky top-0 z-30 glass border-b border-white/10">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -243,7 +244,7 @@
 
   <footer class="border-t border-white/10">
     <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-zinc-400 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-    <p>© <span id="year"></span> Denali's Property Group. All rights reserved.</p>
+      <p>© <span id="year"></span> Denali's Property Group. All rights reserved.</p>
       <div class="flex items-center gap-4">
         <span class="inline-flex items-center gap-1">North Carolina-based • Nationwide friendly</span>
       </div>
@@ -251,13 +252,25 @@
   </footer>
 
   <script>
+    // ===== Your Google Apps Script Web App URL =====
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxmX981g0pc7R9l3IQ-3KUpEWiXwxJ6BcsfPhRDvBFmRqz6WGQ9F_KCgl2FA6b_CoIC/exec";
+
+    // Run after HTML loads (guaranteed)
+    window.addEventListener("DOMContentLoaded", () => {
+      // ✅ Auto-updating year
+      const y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
+
+      // ✅ Default tab
+      setTab("seller");
+    });
 
     function setTab(name) {
       const sellerBtn = document.getElementById('tab-seller');
       const buyerBtn = document.getElementById('tab-buyer');
       const seller = document.getElementById('panel-seller');
       const buyer = document.getElementById('panel-buyer');
+
       if (name === 'seller') {
         sellerBtn.classList.add('tab-active'); buyerBtn.classList.remove('tab-active');
         seller.classList.remove('hidden'); buyer.classList.add('hidden');
@@ -266,14 +279,17 @@
         buyer.classList.remove('hidden'); seller.classList.add('hidden');
       }
     }
-    setTab('seller');
 
     async function handleSubmit(ev, type) {
       ev.preventDefault();
       const form = ev.target;
       const data = Object.fromEntries(new FormData(form).entries());
+
+      // honeypot
       if (data.website) return false;
+
       data.formType = type;
+
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
@@ -281,16 +297,15 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-        alert((type === 'buyer' ? 'Buyer' : 'Seller') + ' info received! We\'ll reach out soon.');
+
+        alert((type === 'buyer' ? 'Buyer' : 'Seller') + " info received! We'll reach out soon.");
         form.reset();
       } catch (e) {
         console.error(e);
-        alert('We could not send your info. Please email us at denspropgroup@yahoo.com.');
+        alert("We could not send your info. Please email us at denspropgroup@yahoo.com.");
       }
       return false;
     }
   </script>
-  
-</script>  
 </body>
 </html>
